@@ -9,12 +9,18 @@ import "../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js";
 
 //  ======== Redux =========
 import { Provider } from "react-redux";
-import store from "./redux/store.js";
+import { persistor, store } from "./redux/store.js";
+import { BrowserRouter } from "react-router-dom";
+import { PersistGate } from "redux-persist/integration/react";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-    <React.StrictMode>
+    // <React.StrictMode>
         <Provider store={store}>
-            <App />
+            <BrowserRouter>
+                <PersistGate loading= "loading..."  persistor={persistor}>
+                    <App />
+                </PersistGate>
+            </BrowserRouter>
         </Provider>
-    </React.StrictMode>
+    // </React.StrictMode>
 );
